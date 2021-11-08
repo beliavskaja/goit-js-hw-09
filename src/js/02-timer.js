@@ -31,7 +31,7 @@ const options = {
 };
 
 const calendar = flatpickr(refs.datePicker, options);
-      
+
 const onStartClick = () => {
     refs.startBtn.disabled = true;
     refs.datePicker.disabled = true;
@@ -40,19 +40,19 @@ const onStartClick = () => {
 }
 
 refs.startBtn.addEventListener('click', onStartClick);
- 
+
 const getTimerTime = () => {
     const currentTime = Date.now();
     const startTime = refs.selectedDate;
     const deltaTime = startTime - currentTime;
     const defaultTime = convertMs(deltaTime);
-      
+
     if (deltaTime < DELTA_DEAD_LINE) {
         clearInterval(refs.intervalId);
     }
     updateTimer(defaultTime);
 }
-      
+
 const updateTimer = ({ days, hours, minutes, seconds }) => {
     console.log(days, hours, minutes, seconds);
     refs.days.textContent = `${days}`;
@@ -60,7 +60,7 @@ const updateTimer = ({ days, hours, minutes, seconds }) => {
     refs.minutes.textContent = `${minutes}`;
     refs.seconds.textContent = `${seconds}`;
 }
-      
+
 const addLeadingZero = (value) => {
     return String(value).padStart(2, '0');
 }
@@ -75,6 +75,6 @@ function convertMs(ms) {
     const hours = Math.floor((ms % day) / hour);
     const minutes = Math.floor(((ms % day) % hour) / minute);
     const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-  
+
     return { days, hours, minutes, seconds };
 }
